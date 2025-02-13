@@ -11,5 +11,10 @@ class AppAssets{
   static const String profileIconUnSelected  = "assets/profile_unselected.png";
   static const String routeImage  = "assets/route_image.png";
   static const String hidePassIcon  = "assets/hide_pass_icon.png";
+  static const String advertise1 = "assets/advertise1.png";
+  static const String advertise2 = "assets/advertise2.png";
+  static const String advertise3 = "assets/advertise3.png";
+  static const String loading = "assets/loading.jpg";
+  static const String starIcon = "assets/star_icon.png";
 
 }
