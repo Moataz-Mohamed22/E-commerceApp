@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:ecommerce_app/core/failures/failures.dart';
 import 'package:ecommerce_app/domain/entities/CategoryOrBrandResponseEntity.dart';
 import 'package:ecommerce_app/domain/entities/ProductResponseEntity.dart';
+import 'package:ecommerce_app/domain/entities/add_cart_response_entity.dart';
 import 'package:ecommerce_app/domain/repositories/data_source/auth_remote_data_source/home_remote_data_source.dart';
 import 'package:ecommerce_app/domain/repositories/repository/home_repository.dart';
 import 'package:injectable/injectable.dart';
@@ -29,5 +30,11 @@ class HomeRepositoryImpl implements HomeRepository {
   Future<Either<Failures, ProductResponseEntity>> getAllProducts() async {
     var either = await homeRemoteDataSource.getAllProducts();
     return either.fold((error) => Left(error), (response) => Right(response));
+  }
+
+  @override
+  Future<Either<Failures, AddCartResponseEntity>> addToCart(String productId) {
+    // TODO: implement addToCart
+    throw UnimplementedError();
   }
 }

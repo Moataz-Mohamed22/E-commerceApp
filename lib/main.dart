@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/core/cach/shared_preferences.dart';
 import 'package:ecommerce_app/core/utils/app_routes.dart';
 import 'package:ecommerce_app/core/utils/app_theme.dart';
 import 'package:ecommerce_app/di/di.dart';
@@ -8,18 +9,28 @@ import 'package:ecommerce_app/features/ui/pages/product_details_screen/product_d
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/utils/bloc_observer.dart';
 
-void main(){
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
   configureDependencies();
-  runApp(MyApp());
+ await SharedPreferencesUtils.init();
+ String routeName ;
+ var token = SharedPreferencesUtils.getData(key: "token");
+ if(token == null){
+   routeName = AppRoutes.loginRoute ;
+ }else {
+   routeName = AppRoutes.homeRoute ;
+ }
+  runApp(MyApp(routeName: routeName,));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+String routeName ;
+MyApp({required this.routeName});
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -36,7 +47,7 @@ class MyApp extends StatelessWidget {
             AppRoutes.homeRoute: (context) => HomeScreen(),
             AppRoutes.productDetailsRoute: (context) => ProductDetailsScreen(),
           },
-          initialRoute: AppRoutes.homeRoute,
+          initialRoute: routeName,
         );
       },
     );

@@ -16,5 +16,6 @@ class AppAssets{
   static const String advertise3 = "assets/advertise3.png";
   static const String loading = "assets/loading.jpg";
   static const String starIcon = "assets/star_icon.png";
+  static const String logo = "assets/logo.png";
 
 }

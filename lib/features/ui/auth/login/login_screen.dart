@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/core/cach/shared_preferences.dart';
 import 'package:ecommerce_app/core/utils/app_assets.dart';
 import 'package:ecommerce_app/core/utils/app_colors.dart';
 import 'package:ecommerce_app/core/utils/app_routes.dart';
@@ -41,10 +42,12 @@ class _LoginScreenState extends State<LoginScreen> {
           DialogueUtils.hideLoading(context);
           DialogueUtils.showMessage(
               context: context,
-              message: "Register Successfully",
+              message: "Login Successfully",
               title: "Success",
               posActionName: "OK",
               posAction: () {
+                //todo: save token
+                SharedPreferencesUtils.saveData(key: "token", value: state.responseEntity.token);
                 Navigator.of(context).pushReplacementNamed(AppRoutes.homeRoute);
               });
         }

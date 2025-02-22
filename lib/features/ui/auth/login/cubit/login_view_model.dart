@@ -14,7 +14,7 @@ class LoginScreenViewModel extends Cubit<LoginStates> {
   TextEditingController passwordController =
       TextEditingController(text: "Ahmed@123");
   TextEditingController emailController =
-      TextEditingController(text: "ahmedfaid010966@gmail.com");
+      TextEditingController(text: "maoataz404@gmail.com");
   var formKey = GlobalKey<FormState>();
 
   void login() async {
