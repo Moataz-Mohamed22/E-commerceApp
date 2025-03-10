@@ -19,8 +19,7 @@ class UserTab extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset(AppAssets.logo),
-              SizedBox(height: 48.h),
+
               AutoSizeText(
                 'Welcome, Moataz',
                 style: AppStyles.medium18Header,
@@ -34,6 +33,7 @@ class UserTab extends StatelessWidget {
                   ),
                    IconButton(onPressed: (){
                      //todo:remove token
+
                      SharedPreferencesUtils.removeData(key: "token");
                      //todo: go to login
 Navigator.of(context).pushNamedAndRemoveUntil(AppRoutes.loginRoute, (routes)=>false);

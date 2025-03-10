@@ -4,11 +4,24 @@ import 'package:ecommerce_app/domain/entities/CategoryOrBrandResponseEntity.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CategoryBrandItem extends StatelessWidget {
+
+
+class CategoryBrandItem extends StatefulWidget {
   CategoryOrBrandEntity item;
 
   CategoryBrandItem({required this.item});
+  @override
+  State<CategoryBrandItem> createState() => _CategoryBrandItemState();
+}
 
+
+class _CategoryBrandItemState extends State<CategoryBrandItem> {
+  @override
+  void initState() {
+
+    super.initState();
+
+  }
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -34,7 +47,7 @@ class CategoryBrandItem extends StatelessWidget {
               width: double.infinity,
               height: 100.h,
               fit: BoxFit.cover,
-              imageUrl: item.image ?? ""),
+              imageUrl: widget.item.image ?? ""),
         ),
         SizedBox(
           height: 8.h,
@@ -42,7 +55,7 @@ class CategoryBrandItem extends StatelessWidget {
         Expanded(
             flex: 1,
             child: Text(
-              item.name ?? "",
+              widget.item.name ?? "",
               textWidthBasis: TextWidthBasis.longestLine,
               softWrap: true,
               textAlign: TextAlign.center,

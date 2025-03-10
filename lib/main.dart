@@ -4,12 +4,15 @@ import 'package:ecommerce_app/core/utils/app_theme.dart';
 import 'package:ecommerce_app/di/di.dart';
 import 'package:ecommerce_app/features/ui/auth/login/login_screen.dart';
 import 'package:ecommerce_app/features/ui/auth/register/register_screen.dart';
+import 'package:ecommerce_app/features/ui/pages/cart/cart_screen.dart';
+import 'package:ecommerce_app/features/ui/pages/cart/cubit/cart_view_model.dart';
 import 'package:ecommerce_app/features/ui/pages/home_screen/home_screen.dart';
+import 'package:ecommerce_app/features/ui/pages/home_screen/tabs/favorite_tab/favorite_tab.dart';
+import 'package:ecommerce_app/features/ui/pages/home_screen/tabs/products_tab/cubit/product_tab_view_model.dart';
 import 'package:ecommerce_app/features/ui/pages/product_details_screen/product_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/utils/bloc_observer.dart';
 
@@ -25,7 +28,10 @@ void main() async{
  }else {
    routeName = AppRoutes.homeRoute ;
  }
-  runApp(MyApp(routeName: routeName,));
+  runApp(MultiBlocProvider( providers: [
+    BlocProvider(create: (context) =>getIt<ProductTabViewModel>()),
+    BlocProvider(create: (context) =>getIt<CartViewModel>()),
+  ],child: MyApp(routeName: routeName,)) );
 }
 
 class MyApp extends StatelessWidget {
@@ -46,8 +52,11 @@ MyApp({required this.routeName});
             AppRoutes.loginRoute : (context) => LoginScreen(),
             AppRoutes.homeRoute: (context) => HomeScreen(),
             AppRoutes.productDetailsRoute: (context) => ProductDetailsScreen(),
+            AppRoutes.cartRoute: (context) => CartScreen(),
+            AppRoutes.favoriteRoute: (context) => FavoriteTab(),
           },
-          initialRoute: routeName,
+          initialRoute:AppRoutes.favoriteRoute
+          // routeName,
         );
       },
     );

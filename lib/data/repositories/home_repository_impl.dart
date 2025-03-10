@@ -33,8 +33,8 @@ class HomeRepositoryImpl implements HomeRepository {
   }
 
   @override
-  Future<Either<Failures, AddCartResponseEntity>> addToCart(String productId) {
-    // TODO: implement addToCart
-    throw UnimplementedError();
+  Future<Either<Failures, AddCartResponseEntity>> addToCart(String productId)async {
+    var either = await homeRemoteDataSource.addToCart(productId);
+    return either.fold((error) => Left(error), (response) => Right(response));
   }
 }

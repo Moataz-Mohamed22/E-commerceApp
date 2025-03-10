@@ -1,6 +1,8 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dartz/dartz.dart';
 import 'package:ecommerce_app/core/api/api_manager.dart';
+import 'package:ecommerce_app/core/cach/shared_preferences.dart';
+import 'package:ecommerce_app/data/model/Add_cart_response_DM.dart';
 import 'package:ecommerce_app/data/model/CategoryOrBrandResponseDm.dart';
 import 'package:ecommerce_app/domain/entities/CategoryOrBrandResponseEntity.dart';
 import 'package:ecommerce_app/domain/entities/ProductResponseEntity.dart';
@@ -89,8 +91,32 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   }
 
   @override
-  Future<Either<Failures, AddCartResponseEntity>> addToCart(String productId) {
-    // TODO: implement addToCart
-    throw UnimplementedError();
+  Future<Either<Failures, AddCartResponseDm>> addToCart(String productId) async{
+    try {
+      final List<ConnectivityResult> connectivityResult =
+          await Connectivity().checkConnectivity();
+      if (connectivityResult.contains(ConnectivityResult.wifi) ||
+          connectivityResult.contains(ConnectivityResult.mobile)) {
+        var token = SharedPreferencesUtils.getData(key: "token");
+        var response =
+            await apiManager.postData(endPoint: EndPoints.addToCart ,
+                body: {
+                  "productId":productId
+                } ,
+            headers: {
+              "token":token
+            });
+        var addToCartResponse = AddCartResponseDm.fromJson(response.data);
+        if (response.statusCode! >= 200 && response.statusCode! < 300) {
+          return Right(addToCartResponse);
+        } else {
+          return Left(ServerError(errorMessage: addToCartResponse.message!));
+        }
+      } else {
+        return Left(NetworkError(errorMessage: "No Internet Connection"));
+      }
+    } catch (e) {
+      return Left(ServerError(errorMessage: e.toString()));
+    }
   }
 }

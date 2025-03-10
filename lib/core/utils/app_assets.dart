@@ -17,5 +17,11 @@ class AppAssets{
   static const String loading = "assets/loading.jpg";
   static const String starIcon = "assets/star_icon.png";
   static const String logo = "assets/logo.png";
+   static const String searchIcon = "assets/searchIcon.png";
+   static const String shoppingIcon = "assets/icon_cart_shopping.png";
+   static const String testImage = "assets/testImag.png";
+   static const String isFavorite = "assets/isFavorite.png";
+
+
 
 }

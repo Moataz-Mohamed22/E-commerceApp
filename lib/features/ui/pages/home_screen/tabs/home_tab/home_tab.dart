@@ -11,11 +11,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class HomeTab extends StatelessWidget {
-  HomeTabViewModel viewModel = getIt<HomeTabViewModel>();
+class HomeTab extends StatefulWidget {
+  @override
+  State<HomeTab> createState() => _HomeTabState();
+}
 
+class _HomeTabState extends State<HomeTab> {
+  HomeTabViewModel viewModel = getIt<HomeTabViewModel>();
+@override
+  void initState() {
+  viewModel.getAllCategories();
+  viewModel.getAllBrands();
+  super.initState();
+  }
   @override
   Widget build(BuildContext context) {
+
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -27,50 +38,54 @@ class HomeTab extends StatelessWidget {
             AppAssets.advertise3,
           ]),
           sizedBox(height: 24),
-          viewAllRow("Category"),
+        //  viewAllRow("Category"),
           BlocBuilder<HomeTabViewModel, HomeTabStates>(
-            bloc: viewModel..getAllCategories(),
+            bloc: viewModel,
             builder: (context, state) {
-              if (state is CategoryLoadingState) {
+              if (state is CategoryLoadingState || state is BrandLoadingState) {
                 return Center(
-                  child: CircularProgressIndicator(
-                    color: AppColors.primaryColor,
-                  ),
+                  child: CircularProgressIndicator(color: AppColors.primaryColor),
                 );
               } else if (state is CategoryErrorState) {
-                return Center(
-                  child: Text(state.failures.errorMessage),
-                );
-              } else if (state is CategorySuccessState) {
-                return Text(
-                    state.categoryResponseEntity.data!.length.toString());
-                // return buildCategoryBrandSec(list: viewModel.categoryList);
-              }
-              return Container();
-            },
-          ),
-          viewAllRow("Brands"),
-          BlocBuilder<HomeTabViewModel, HomeTabStates>(
-            bloc: viewModel..getAllBrands(),
-            builder: (context, state) {
-              if (state is BrandLoadingState) {
-                return Center(
-                  child: CircularProgressIndicator(
-                    color: AppColors.primaryColor,
-                  ),
-                );
+                return Center(child: Text(state.failures.errorMessage));
               } else if (state is BrandErrorState) {
-                return Center(
-                  child: Text(state.failures.errorMessage),
+                return Center(child: Text(state.failures.errorMessage));
+              } else if (state is CategorySuccessState || state is BrandSuccessState) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    viewAllRow("Category"),
+                    buildCategoryBrandSec(list: viewModel.categoryList),
+                    viewAllRow("Brands"),
+                    buildCategoryBrandSec(list: viewModel.brandsList),
+                  ],
                 );
-              } else if (state is BrandSuccessState) {
-                return Text(
-                    state.categoryResponseEntity.data!.length.toString());
-                // buildCategoryBrandSec(list: viewModel.brandsList)
               }
               return Container();
             },
           ),
+
+         // viewAllRow("Brands"),
+          // BlocBuilder<HomeTabViewModel, HomeTabStates>(
+          //   bloc: viewModel,
+          //   builder: (context, state) {
+          //     if (state is BrandLoadingState) {
+          //       return Center(
+          //         child: CircularProgressIndicator(
+          //           color: AppColors.primaryColor,
+          //         ),
+          //       );
+          //     } else if (state is BrandErrorState) {
+          //       return Center(
+          //         child: Text(state.failures.errorMessage),
+          //       );
+          //     } else if (state is BrandSuccessState) {
+          //       return buildCategoryBrandSec(list: viewModel.brandsList);
+          //       // buildCategoryBrandSec(list: viewModel.brandsList)
+          //     }
+          //     return Container();
+          //   },
+          // ),
         ],
       ),
     );
