@@ -4,6 +4,8 @@ import 'package:ecommerce_app/core/utils/app_colors.dart';
 import 'package:ecommerce_app/core/utils/app_styles.dart';
 import 'package:ecommerce_app/core/utils/flutter_toast.dart';
 import 'package:ecommerce_app/domain/entities/ProductResponseEntity.dart';
+import 'package:ecommerce_app/features/ui/pages/home_screen/tabs/favorite_tab/cubit/favorite_states.dart';
+import 'package:ecommerce_app/features/ui/pages/home_screen/tabs/favorite_tab/cubit/favorite_view_model.dart';
 import 'package:ecommerce_app/features/ui/pages/home_screen/tabs/products_tab/cubit/product_states.dart';
 import 'package:ecommerce_app/features/ui/pages/home_screen/tabs/products_tab/cubit/product_tab_view_model.dart';
 import 'package:ecommerce_app/features/ui/pages/home_screen/tabs/products_tab/custom_txt.dart';
@@ -48,23 +50,38 @@ class ProductTabItem extends StatelessWidget {
               Positioned(
                 top: 8.h,
                 right: 8.w,
-                child: CircleAvatar(
-                  backgroundColor: AppColors.whiteColor,
-                  radius: 20.r,
-                  child: Center(
-                    child: IconButton(
-                      onPressed: () {
-                        // Add to favorite
-                      },
-                      color: AppColors.primaryColor,
-                      padding: EdgeInsets.zero,
-                      iconSize: 30.r,
-                      icon: Icon(
-                        Icons.favorite_border_rounded,
-                        color: AppColors.primaryColor,
+                child: BlocBuilder<FavoriteViewModel, FavoriteStates>(
+                  builder: (context, state) {
+                    bool isFavorite = state is FavoriteUpDateState &&
+                        state.favoriteProducts.contains(product);
+                    return CircleAvatar(
+                      backgroundColor: AppColors.whiteColor,
+                      radius: 20.r,
+                      child: Center(
+                        child: IconButton(
+                          onPressed: () {
+                            final cubit = context.read<FavoriteViewModel>();
+                            if (isFavorite) {
+                              cubit.removeFromFavorite(product.id ?? "");
+                               ToastMessage.toastMsg("Removed from favorites", AppColors.greenColor, AppColors.whiteColor);
+
+                            } else {
+                              cubit.addToFavorite(product);
+                              ToastMessage.toastMsg("Added to favorites", AppColors.primaryColor, AppColors.whiteColor);
+                            }
+                          },
+                          color: AppColors.primaryColor,
+                          padding: EdgeInsets.zero,
+                          iconSize: 30.r,
+                          icon: Icon(
+                            isFavorite ? Icons.favorite : Icons.favorite_border_rounded,
+                            color: AppColors.primaryColor,
+
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
+                    );
+                  },
                 ),
               ),
             ],
@@ -104,7 +121,8 @@ class ProductTabItem extends StatelessWidget {
                     InkWell(
                       onTap: () {
                         // Add to cart
-                        ProductTabViewModel.get(context).addToCart(product.id ?? "");
+                        ProductTabViewModel.get(context)
+                            .addToCart(product.id ?? "");
                       },
                       child: Icon(
                         Icons.add_circle,

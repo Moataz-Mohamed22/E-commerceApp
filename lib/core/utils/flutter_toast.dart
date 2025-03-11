@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class ToastMessage{
-  static Future<bool?> toastMsg(
-      String msg, Color backgroundColor, Color textColor){
-    return Fluttertoast.showToast(
-        msg: msg,
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.BOTTOM,
-      timeInSecForIosWeb: 1,
+class ToastMessage {
+  static void toastMsg(String message, Color backgroundColor, Color textColor) {
+    // تنفيذ التوست هنا، على سبيل المثال:
+    Fluttertoast.showToast(
+      msg: message,
       backgroundColor: backgroundColor,
       textColor: textColor,
-      fontSize: 20
+      toastLength: Toast.LENGTH_SHORT,
     );
   }
 }

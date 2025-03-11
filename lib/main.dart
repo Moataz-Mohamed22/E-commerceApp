@@ -7,6 +7,7 @@ import 'package:ecommerce_app/features/ui/auth/register/register_screen.dart';
 import 'package:ecommerce_app/features/ui/pages/cart/cart_screen.dart';
 import 'package:ecommerce_app/features/ui/pages/cart/cubit/cart_view_model.dart';
 import 'package:ecommerce_app/features/ui/pages/home_screen/home_screen.dart';
+import 'package:ecommerce_app/features/ui/pages/home_screen/tabs/favorite_tab/cubit/favorite_view_model.dart';
 import 'package:ecommerce_app/features/ui/pages/home_screen/tabs/favorite_tab/favorite_tab.dart';
 import 'package:ecommerce_app/features/ui/pages/home_screen/tabs/products_tab/cubit/product_tab_view_model.dart';
 import 'package:ecommerce_app/features/ui/pages/product_details_screen/product_details_screen.dart';
@@ -30,6 +31,7 @@ void main() async{
  }
   runApp(MultiBlocProvider( providers: [
     BlocProvider(create: (context) =>getIt<ProductTabViewModel>()),
+    BlocProvider(create: (context) => FavoriteViewModel()),
     BlocProvider(create: (context) =>getIt<CartViewModel>()),
   ],child: MyApp(routeName: routeName,)) );
 }
@@ -55,8 +57,8 @@ MyApp({required this.routeName});
             AppRoutes.cartRoute: (context) => CartScreen(),
             AppRoutes.favoriteRoute: (context) => FavoriteTab(),
           },
-          initialRoute:AppRoutes.favoriteRoute
-          // routeName,
+          initialRoute:
+          routeName,
         );
       },
     );
