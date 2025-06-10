@@ -6,7 +6,6 @@ import 'package:ecommerce_app/core/utils/flutter_toast.dart';
 import 'package:ecommerce_app/domain/entities/ProductResponseEntity.dart';
 import 'package:ecommerce_app/features/ui/pages/home_screen/tabs/favorite_tab/cubit/favorite_states.dart';
 import 'package:ecommerce_app/features/ui/pages/home_screen/tabs/favorite_tab/cubit/favorite_view_model.dart';
-import 'package:ecommerce_app/features/ui/pages/home_screen/tabs/products_tab/cubit/product_states.dart';
 import 'package:ecommerce_app/features/ui/pages/home_screen/tabs/products_tab/cubit/product_tab_view_model.dart';
 import 'package:ecommerce_app/features/ui/pages/home_screen/tabs/products_tab/custom_txt.dart';
 import 'package:flutter/material.dart';

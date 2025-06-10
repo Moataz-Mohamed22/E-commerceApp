@@ -11,11 +11,11 @@ class RegisterViewModel extends Cubit<RegisterStates> {
   RegisterViewModel({required this.registerUseCase})
       :super(RegisterInitialState());
 
-  TextEditingController fullNameController = TextEditingController(text: "Ahmed Fayed");
-  TextEditingController passwordController = TextEditingController(text: "Ahmedfayed@55");
-  TextEditingController rePasswordController = TextEditingController(text: "Ahmedfayed@55");
+  TextEditingController fullNameController = TextEditingController(text: "AL-Moataz Bellah Mohamed");
+  TextEditingController passwordController = TextEditingController(text: "mOataz@55");
+  TextEditingController rePasswordController = TextEditingController(text: "mOataz@55");
   TextEditingController phoneController = TextEditingController(text: "01096640218");
-  TextEditingController emailController = TextEditingController(text: "ahmedfaid542@gmail.com");
+  TextEditingController emailController = TextEditingController(text: "moataz77ww@gmail.com");
   var formKey = GlobalKey<FormState>();
 
   void register() async {

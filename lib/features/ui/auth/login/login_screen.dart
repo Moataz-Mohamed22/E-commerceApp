@@ -105,7 +105,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       CustomTextFormField(
                           controller: viewModel.passwordController,
-                          suffixIcon: Image.asset(AppAssets.hidePassIcon),
+
+
                           hintText: "enter your password"),
                       SizedBox(
                         height: 5.h,

@@ -4,9 +4,7 @@ import 'package:ecommerce_app/core/api/api_manager.dart';
 import 'package:ecommerce_app/core/cach/shared_preferences.dart';
 import 'package:ecommerce_app/data/model/Add_cart_response_DM.dart';
 import 'package:ecommerce_app/data/model/CategoryOrBrandResponseDm.dart';
-import 'package:ecommerce_app/domain/entities/CategoryOrBrandResponseEntity.dart';
-import 'package:ecommerce_app/domain/entities/ProductResponseEntity.dart';
-import 'package:ecommerce_app/domain/entities/add_cart_response_entity.dart';
+
 import 'package:ecommerce_app/domain/repositories/data_source/auth_remote_data_source/home_remote_data_source.dart';
 import 'package:injectable/injectable.dart';
 

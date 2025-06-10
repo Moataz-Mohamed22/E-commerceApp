@@ -77,51 +77,7 @@ class CustomContainerWidget extends StatelessWidget {
             ),
           ),
           SizedBox(width: 10.w),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Container(
-                  width: 80.w,
-                  height: 80.h,
-                  child: image?.startsWith('http') == true
-                      ? CachedNetworkImage(
-                    imageUrl: image ?? "",
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) => Center(
-                      child: CircularProgressIndicator(color: AppColors.primaryDark),
-                    ),
-                    errorWidget: (context, url, error) => Image.asset(
-                      AppAssets.testImage,
-                      fit: BoxFit.cover,
-                    ),
-                  )
-                      : Image.asset(
-                    image ?? AppAssets.testImage,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              SizedBox(height: 5.h),
-              Container(
-                alignment: Alignment.bottomRight,
-                width: 100.w,
-                height: 36.h,
-                decoration: BoxDecoration(
-                  color: AppColors.primaryColor,
-                  borderRadius: BorderRadius.circular(15.r),
-                ),
-                child: TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    "Add To Cart",
-                    style: AppStyles.regular12Text.copyWith(color: AppColors.whiteColor),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
+     ]
       ),
     );
   }

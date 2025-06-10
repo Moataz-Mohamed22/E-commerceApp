@@ -2,7 +2,6 @@ import 'package:ecommerce_app/core/utils/app_assets.dart';
 import 'package:ecommerce_app/core/utils/app_colors.dart';
 import 'package:ecommerce_app/core/utils/app_routes.dart';
 import 'package:ecommerce_app/features/ui/pages/home_screen/home_screen_cubit/home_screen_view_model.dart';
-import 'package:ecommerce_app/features/ui/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
